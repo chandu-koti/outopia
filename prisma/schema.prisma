@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Brand {
+  id                String     @id @default(uuid())
+  name              String     @unique
+  logo              String
+  lightLogo         String?
+  tagline           String
+  subtitle          String
+  description       String     @db.Text
+  heroImage         String
+  gradient          String
+  accentColor       String
+  primaryButton     String
+  primaryButtonLink String
+  secondaryButton   String
+  secondaryButtonLink String
+  categories        Category[]
+  products          Product[]
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+}
+
+model Category {
+  id            String        @id @default(uuid())
+  name          String
+  slug          String        @unique
+  description   String        @db.Text
+  image         String
+  href          String
+  brandId       String
+  brand         Brand         @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  count         String?
+  subcategories String[]      // Keep temporarily for migration
+  products      Product[]
+  Subcategory   Subcategory[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Subcategory {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  description String?   @db.Text
+  image       String?   // Optional image for subcategory
+  categoryId  String
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([categoryId])
+}
+
+model Product {
+  id              String       @id @default(uuid())
+  name            String
+  slug            String       @unique
+  categoryId      String
+  category        Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  subcategoryId   String?      // Optional subcategory
+  subcategory     Subcategory? @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  brandId         String
+  brand           Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  price           String
+  image           String
+  description     String?      @db.Text
+  specifications  Json?
+  features        String[]
+  inStock         Boolean      @default(true)
+  images          String[]
+  brochureUrl     String?
+  displayOrder    Int?         // Order within category (1, 2, 3, etc.)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([subcategoryId])
+  @@index([categoryId, displayOrder])
+}
+
+model Project {
+  id              String   @id @default(uuid())
+  name            String
+  slug            String   @unique
+  client          String
+  location        String
+  area            String
+  year            String
+  category        String
+  description     String   @db.Text
+  challenge       String   @db.Text
+  solution        String   @db.Text
+  impact          String   @db.Text
+  mainImage       String
+  beforeImage     String?
+  afterImage      String?
+  images          String[]
+  features        String[]
+  specifications  Json?
+  testimonial     String?  @db.Text
+  testimonialAuthor String?
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+model QuoteRequest {
+  id          String   @id @default(uuid())
+  name        String
+  company     String?
+  email       String
+  phone       String
+  quantity    String?
+  message     String?  @db.Text
+  productId   String
+  productName String
+  status      String   @default("NEW")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ContactInquiry {
+  id          String   @id @default(uuid())
+  name        String
+  company     String?
+  email       String
+  phone       String
+  projectType String
+  location    String?
+  budget      String?
+  timeline    String?
+  message     String?  @db.Text
+  source      String?
+  status      String   @default("NEW")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum Role {
+  USER
+  ADMIN
+}

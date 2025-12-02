@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #059669;
+        }
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #efe;
+            color: #0a0;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .info {
+            background: #eef;
+            color: #00a;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Test Page</h1>
+        <p>This page tests the login functionality directly.</p>
+        
+        <div id="result"></div>
+        
+        <h2>Test Actions:</h2>
+        <button onclick="testLogin()">1. Test Login API</button>
+        <button onclick="checkLocalStorage()">2. Check LocalStorage</button>
+        <button onclick="goToAdmin()">3. Go to Admin</button>
+        <button onclick="goToLogin()">4. Go to Login Page</button>
+        <button onclick="clearStorage()">5. Clear Storage</button>
+        
+        <h2>Test Results:</h2>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        const result = document.getElementById('result');
+        
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = message;
+            output.appendChild(div);
+        }
+        
+        async function testLogin() {
+            log('Testing login API...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:3001/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@outopia.com',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    log('✅ Login successful!', 'success');
+                    log('<pre>' + JSON.stringify(data, null, 2) + '</pre>', 'info');
+                    
+                    // Store in localStorage
+                    localStorage.setItem('auth-token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    log('✅ Data stored in localStorage', 'success');
+                } else {
+                    log('❌ Login failed: ' + data.error, 'error');
+                }
+            } catch (error) {
+                log('❌ Error: ' + error.message, 'error');
+            }
+        }
+        
+        function checkLocalStorage() {
+            log('Checking localStorage...', 'info');
+            
+            const token = localStorage.getItem('auth-token');
+            const user = localStorage.getItem('user');
+            
+            if (token) {
+                log('✅ Token found: ' + token.substring(0, 50) + '...', 'success');
+            } else {
+                log('❌ No token in localStorage', 'error');
+            }
+            
+            if (user) {
+                log('✅ User found: <pre>' + user + '</pre>', 'success');
+            } else {
+                log('❌ No user in localStorage', 'error');
+            }
+        }
+        
+        function goToAdmin() {
+            log('Navigating to admin page...', 'info');
+            window.location.href = 'http://localhost:3001/admin';
+        }
+        
+        function goToLogin() {
+            log('Navigating to login page...', 'info');
+            window.location.href = 'http://localhost:3001/login';
+        }
+        
+        function clearStorage() {
+            localStorage.clear();
+            document.cookie = 'auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            log('✅ Storage cleared', 'success');
+        }
+        
+        // Check initial state
+        window.onload = () => {
+            result.innerHTML = '<div class="info">Server URL: http://localhost:3001</div>';
+            checkLocalStorage();
+        };
+    </script>
+</body>
+</html>
