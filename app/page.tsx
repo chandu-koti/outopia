@@ -15,7 +15,10 @@ export default function HomePage() {
       <AnimatedHeroSection />
       <DynamicBrandSections />
       <ValueProposition />
-      <AnimatedProductCategories />
+      <AnimatedProductCategories 
+        title="Our Products"
+        subtitle="Explore our premium collection of outdoor furniture and equipment"
+      />
       <DynamicFeaturedProjects />
       <DesignBuildProcess />
       <CTASection />
