@@ -1,9 +1,6 @@
 {
   "version": 2,
   "builds": [
-    { "src": "infrascapes-project/package.json", "use": "@vercel/next" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "infrascapes-project/$1" }
+    { "src": "package.json", "use": "@vercel/next" }
   ]
 }
