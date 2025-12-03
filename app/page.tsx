@@ -1,21 +1,21 @@
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
-      <header className="bg-gray-900 text-white p-6">
-        <h1 className="text-3xl font-bold">Infrascapes - Live</h1>
-        <p className="text-gray-300">Premium Outdoor Furniture & Design-Build Solutions</p>
+    <div style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
+      <header style={{ backgroundColor: '#1f2937', color: '#fff', padding: '24px' }}>
+        <h1 style={{ fontSize: '30px', fontWeight: 'bold' }}>Infrascapes</h1>
+        <p style={{ color: '#d1d5db' }}>Premium Outdoor Furniture & Design-Build Solutions</p>
       </header>
       
-      <main className="p-8">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4">Welcome to Infrascapes</h2>
-          <p className="text-gray-700 mb-4">
-            Your project is successfully deployed on Vercel! 🎉
+      <main style={{ padding: '32px' }}>
+        <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>Welcome to Infrascapes</h2>
+          <p style={{ color: '#374151', marginBottom: '16px' }}>
+            Your project is successfully deployed! ✅
           </p>
           
-          <div className="bg-blue-50 border border-blue-200 rounded p-4 mb-6">
-            <h3 className="font-bold text-blue-900 mb-2">✅ Deployment Status</h3>
-            <ul className="text-blue-800 space-y-1">
+          <div style={{ backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
+            <h3 style={{ fontWeight: 'bold', color: '#1e3a8a', marginBottom: '8px' }}>✅ Status</h3>
+            <ul style={{ color: '#1e40af', lineHeight: '1.75' }}>
               <li>✓ Code deployed successfully</li>
               <li>✓ PostgreSQL database connected (Neon)</li>
               <li>✓ Environment variables configured</li>
@@ -23,10 +23,10 @@ export default function HomePage() {
             </ul>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="border rounded p-4">
-              <h3 className="font-bold mb-2">🚀 Next Steps</h3>
-              <ul className="text-sm text-gray-700 space-y-1">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
+            <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px' }}>
+              <h3 style={{ fontWeight: 'bold', marginBottom: '8px' }}>🚀 Next Steps</h3>
+              <ul style={{ fontSize: '14px', color: '#374151', lineHeight: '1.75' }}>
                 <li>• Verify all components load correctly</li>
                 <li>• Test API endpoints</li>
                 <li>• Check database connectivity</li>
@@ -34,9 +34,9 @@ export default function HomePage() {
               </ul>
             </div>
             
-            <div className="border rounded p-4">
-              <h3 className="font-bold mb-2">📊 Project Info</h3>
-              <ul className="text-sm text-gray-700 space-y-1">
+            <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px' }}>
+              <h3 style={{ fontWeight: 'bold', marginBottom: '8px' }}>📊 Project Info</h3>
+              <ul style={{ fontSize: '14px', color: '#374151', lineHeight: '1.75' }}>
                 <li>• Framework: Next.js 15</li>
                 <li>• Database: PostgreSQL (Neon)</li>
                 <li>• Hosting: Vercel</li>
@@ -47,8 +47,8 @@ export default function HomePage() {
         </div>
       </main>
 
-      <footer className="bg-gray-900 text-white p-6 mt-12">
-        <p className="text-center text-gray-400">© 2025 Infrascapes. All rights reserved.</p>
+      <footer style={{ backgroundColor: '#1f2937', color: '#fff', padding: '24px', marginTop: '48px' }}>
+        <p style={{ textAlign: 'center', color: '#9ca3af' }}>© 2025 Infrascapes. All rights reserved.</p>
       </footer>
     </div>
   );
