@@ -53,7 +53,7 @@ export function ServiceCTA() {
               className="flex items-center justify-center text-gray-100 hover:text-white transition-colors"
             >
               <Mail className="w-4 h-4 mr-2" />
-              Sales@infrascapes.in
+              Sales@outopiafurniture.com
             </a>
           </div>
         </motion.div>
