@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://outopia.in",
   contact: {
     phone: "+91 9866073804",
-    email: "Sales@infrascapes.in",
+    email: "Sales@outopiafurniture.com",
     whatsapp: "+91 9866073804",
     address: {
       line1: "1st Floor, 470/471, East Avenue Building",
