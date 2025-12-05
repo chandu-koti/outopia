@@ -49,7 +49,7 @@ export function ServiceCTA() {
               +91 9866073804
             </a>
             <a
-              href="mailto:Sales@infrascapes.in"
+              href="mailto:Sales@outopiafurniture.com"
               className="flex items-center justify-center text-gray-100 hover:text-white transition-colors"
             >
               <Mail className="w-4 h-4 mr-2" />
