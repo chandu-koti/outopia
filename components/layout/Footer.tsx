@@ -105,7 +105,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="inline-block mb-4">
               <Image
-                src="/images/logo/OUTOPIA LOGO-12.PNG"
+                src="/images/logo/Untitled-54x300.png"
                 alt={siteConfig.name}
                 width={300}
                 height={76}
