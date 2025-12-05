@@ -64,7 +64,7 @@ export function PremiumFooter() {
             >
               <div className="mb-4">
                 <Image
-                  src="/images/logo/cropped-cropped-OFFICE-LOGO-01-300x54-1.png"
+                  src="/images/logo/Untitled-54x300.png"
                   alt="Infrascapes Logo"
                   width={180}
                   height={32}
